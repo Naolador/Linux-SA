@@ -13,7 +13,7 @@ echo "" > $NODES_FIX
 send_mail (){
     (
     echo "From: AWS TOKYO Agency <monitor@tokyo.aws.com>";
-    echo "To: suwwr@hotmail.com";
+    echo "To: XXX@XXXX.XXX";
     echo "Subject: New Activity on Shadowsocks Detected!";
     echo "Mime-Version: 1.0";
     echo "Content-Type: text/html; charset=ISO-8859-1";

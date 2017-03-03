@@ -25,7 +25,7 @@ send_mail (){
     echo "<html>";
     echo "<body>";
     echo "<pre style="font: Arial">";
-	${SYSTEMCTL} status httpd
+	${SYSTEMCTL} status httpd -l
 	) | /usr/sbin/sendmail -t
 }
 

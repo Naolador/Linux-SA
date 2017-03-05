@@ -9,7 +9,7 @@
 ########################################################
 
 #!/bin/bash
-DIG=/usr/bin/dig && [ -x "$DIG" ] || DIG=/usr/sbin/dig && [ -x "$DIG" ] || DIG=/bin/dig && [ -x "$DIG" ] || echo "dig is not found! exiting." || exit 3
+DIG=/usr/bin/dig && [ -x "$DIG" ] || DIG=/usr/sbin/dig && [ -x "$DIG" ] || DIG=/bin/dig && [ -x "$DIG" ] || echo "dig: command not found! exiting." || exit 3
 NC=/usr/bin/nc && [ -x "$NC" ] || NC=/usr/local/bin/nc && [ -x "$NC" ] || NC=/bin/nc && [ -x "$DIG" ] || NC=none
 
 HELP (){
@@ -20,17 +20,17 @@ HELP (){
 	exit 1
 }
 send_mail (){
-    (
-    echo "From: AWS Monitoring Agency <monitor@`hostname`>";
-    echo "To: $RECIPIENT"; 
-    echo "Subject: $SUBJECT";
-    echo "Mime-Version: 1.0";
-    echo "Content-Type: text/html; charset=ISO-8859-1";
-    echo "Content-Transfer-Encoding: 7bit";
-    echo "Content-Disposition: inline";
-    echo "<html>";
-    echo "<body>";
-    echo "<pre style="font: Arial">";
+	(
+	echo "From: AWS Monitoring Agency <monitor@`hostname`>";
+	echo "To: $RECIPIENT"; 
+	echo "Subject: $SUBJECT";
+	echo "Mime-Version: 1.0";
+	echo "Content-Type: text/html; charset=ISO-8859-1";
+	echo "Content-Transfer-Encoding: 7bit";
+	echo "Content-Disposition: inline";
+	echo "<html>";
+	echo "<body>";
+	echo "<pre style="font: Arial">";
 	echo $CONTENT;
 	) | /usr/sbin/sendmail -t
 }
@@ -51,6 +51,8 @@ then
 	echo "This command requires arguments!"
 	HELP
 fi
+
+# Vaildate the hostname or ip address
 if [[ "$TARGET" =~ ^[A-Za-z].* ]]
 then
 	DOMAIN=`$DIG $TARGET | grep "ANSWER SECTION"`
@@ -74,6 +76,7 @@ else
 	exit 2
 fi
 
+# Start testing the port status
 echo "Connecting to ${TARGET}:${PORT}..."
 if [ "$NC" = none ]
 then
@@ -106,4 +109,3 @@ then
 			echo "Port is blocked!"
 			exit 4
 fi
-

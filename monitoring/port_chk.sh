@@ -1,7 +1,8 @@
 ########################################################
 #              Port Connectivity Checker               #
-# Desc: Check whether the port is accessable or not,   #
-#       drop an email to inform the administrator.     #
+# Desc: Check whether the port is accessable or not.   #
+#       Users can also choose to drop an email when    #
+#       it was failed to reach the port.               #
 # Author: Neil Wang                                    #
 # Date: 2017-03-03                                     #
 # Ver: 0.1                                             #
@@ -13,7 +14,7 @@ NC=/usr/bin/nc && [ -x "$NC" ] || NC=/usr/local/bin/nc && [ -x "$NC" ] || NC=/bi
 
 HELP (){
 	echo "Usage: $0 [ -r recipient@email.com ] -s ( hostname | ip ) -p port_number"
-	echo "	-r:  Send result through email instead of print on the screen."
+	echo "	-r:  Send the result through an email when the port was failed, instead of printing on the screen."
 	echo "	-s:  Define the FQDN format of hostname or ip address you'd like to check."
 	echo "	-p:  Specify the port number you'd like to check."
 	exit 1

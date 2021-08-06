@@ -1,0 +1,10 @@
+version: '3'
+services:
+    nginx:
+        image: nginx:stable-alpine
+        ports:
+            - "80:80"
+            - "443:443"
+        volumes:
+            - ./data/nginx/sites-enabled:/etc/nginx/sites-enabled
+            - ./data/nginx/sites-available:/etc/nginx/sites-available
